@@ -15,7 +15,7 @@ const Task = ({
         const { id, ...rest } = task;
         updateStatus(id, {...rest, status:e.target.value});
     };
-    
+
     return (
         <div className={`${container} bg-white rounded p-4 my-2`}>
             <div className="task-header">
@@ -24,6 +24,7 @@ const Task = ({
             <div className="text-sm">{task.description}</div>
             <div className="flex justify-end">
                 <select
+                    className="absolute top-1/2 right-4 -translate-y-1/2 border-[1px] p-2 rounded font-bold"
                     name="task-status"
                     id="task-status"
                     defaultValue={task.status}
