@@ -1,15 +1,19 @@
 import { ChangeEvent, Fragment, FunctionComponent, useState } from "react";
+import { TASK_STATUSES } from "../lib/helpers";
 import TaskList from "./TaskList";
 import { TaskInterface } from "./types";
 
 interface TasksPageProps {
     tasks: TaskInterface[];
     onCreateTask: (args: any) => void;
+    onStatusChange: (...args: any) => void;
 }
 
-const TASK_STATUSES = ["Unstarted", "In Progress", "Completed"];
-
-const TasksPage: FunctionComponent<TasksPageProps> = ({ tasks, onCreateTask }) => {
+const TasksPage: FunctionComponent<TasksPageProps> = ({
+    tasks,
+    onCreateTask,
+    onStatusChange,
+}) => {
     const [state, setState] = useState<{ [key: string]: any }>({
         showNewCardForm: false,
         title: "",
@@ -52,6 +56,7 @@ const TasksPage: FunctionComponent<TasksPageProps> = ({ tasks, onCreateTask }) =
                     key={`id-${index.toString()}`}
                     status={status}
                     tasks={statusTask}
+                    onStatusChange={onStatusChange}
                 />
             );
         });

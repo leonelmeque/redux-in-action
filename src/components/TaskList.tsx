@@ -5,15 +5,13 @@ import { TaskInterface } from "./types";
 interface TaskListProps {
     tasks: TaskInterface[];
     status: string;
+    onStatusChange:(...args:any)=>void
 }
 
-const TaskList: FunctionComponent<TaskListProps> = ({ tasks, status }) => (
+const TaskList: FunctionComponent<TaskListProps> = ({ tasks, onStatusChange }) => (
     <div className="task-list">
-        <div className="task-list-title">
-            <strong>{status}</strong>
-        </div>
         {tasks.map((task) => (
-            <Task key={`task-${task.id}`} task={task} />
+            <Task key={`task-${task.id}`} task={task} updateStatus={onStatusChange} />
         ))}
     </div>
 );

@@ -2,7 +2,7 @@ import { FunctionComponent } from "react";
 import { connect, ConnectedProps } from "react-redux";
 import "./App.css";
 import TasksPage from "./components/TasksPage";
-import { createTask } from "./redux/creators/tasks-creators";
+import { createTask, updateTask } from "./redux/creators/tasks-creators";
 
 function mapStateToProps(state: any) {
     const { tasks } = state;
@@ -20,10 +20,13 @@ const App: FunctionComponent<ReduxProps> = ({ tasks:{tasks}, dispatch }) => {
         dispatch(createTask({ title, description }));
     };
 
-    console.log(tasks)
+    const onStatusChange = (id:number, params:any)=>{
+        dispatch(updateTask({id, params}))
+    }
+
     return (
-        <div className="App">
-            <TasksPage tasks={tasks} onCreateTask={onCreateTask} />
+        <div className="max-w-4xl mx-auto">
+            <TasksPage tasks={tasks} onCreateTask={onCreateTask} onStatusChange={onStatusChange} />
         </div>
     );
 };
