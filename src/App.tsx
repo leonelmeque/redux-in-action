@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { FunctionComponent } from "react";
+import { connect, ConnectedProps } from "react-redux";
+import "./App.css";
+import TasksPage from "./components/TasksPage";
+import { createTask } from "./redux/creators/tasks-creators";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+function mapStateToProps(state: any) {
+    const { tasks } = state;
+    return {
+        tasks,
+    };
 }
 
-export default App;
+const connector = connect(mapStateToProps);
+
+type ReduxProps = ConnectedProps<typeof connector>;
+
+const App: FunctionComponent<ReduxProps> = ({ tasks:{tasks}, dispatch }) => {
+    const onCreateTask = ({ title, description }: any) => {
+        dispatch(createTask({ title, description }));
+    };
+
+    console.log(tasks)
+    return (
+        <div className="App">
+            <TasksPage tasks={tasks} onCreateTask={onCreateTask} />
+        </div>
+    );
+};
+
+export default connect(mapStateToProps)(App);
