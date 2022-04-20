@@ -11,7 +11,7 @@ interface TaskListProps {
 const TaskList: FunctionComponent<TaskListProps> = ({ tasks, onStatusChange }) => (
     <div className="task-list">
         {tasks.map((task) => (
-            <Task key={`task-${task.id}`} task={task} updateStatus={onStatusChange} />
+            <Task key={`${task.title}`} task={task} updateStatus={onStatusChange} />
         ))}
     </div>
 );

@@ -64,34 +64,45 @@ const TasksPage: FunctionComponent<TasksPageProps> = ({
     return (
         <Fragment>
             <div className="tasks">
-                <div className="task-list-header">
-                    <button className="btn btn-default" onClick={toggleForm}>
+                <div className="flex items-center justify-between my-4">
+                    <h2 className="text-2xl">
+                      {!state?.showNewCardForm ? 'Your Tasks' : 'Add a new task'}
+                    </h2>
+                    <button
+                        className="py-3 px-4 bg-black rounded-sm text-white font-bold"
+                        onClick={toggleForm}>
                         + New Task
                     </button>
                 </div>
-                {state?.showNewCardForm && (
-                    <form className="task-list-form" onSubmit={_onCreateTask}>
-                        <input
-                            type="text"
-                            className="full-with-input"
-                            onChange={handleChange}
-                            value={state?.title || ""}
-                            name="title"
-                            placeholder="title"
-                        />
-                        <input
-                            type="text"
-                            className="full-with-input"
-                            onChange={handleChange}
-                            value={state?.description || ""}
-                            name="description"
-                            placeholder="description"
-                        />
-                        <button className="button" type="submit">
-                            Save
-                        </button>
-                    </form>
-                )}
+                <div className="my-4">
+                    {state?.showNewCardForm && (
+                        <form className="flex gap-4 flex-col" onSubmit={_onCreateTask}>
+                            <input
+                                type="text"
+                                className="px-2 py-4 border-[1px]"
+                                onChange={handleChange}
+                                value={state?.title || ""}
+                                name="title"
+                                placeholder="title"
+                            />
+                            <input
+                                type="text"
+                                className="px-2 py-4 border-[1px]"
+                                onChange={handleChange}
+                                value={state?.description || ""}
+                                name="description"
+                                placeholder="description"
+                            />
+                            <div className="self-end">
+                                <button
+                                    className="py-3 px-4 bg-green-300 font-bold rounded-sm"
+                                    type="submit">
+                                    Save task
+                                </button>
+                            </div>
+                        </form>
+                    )}
+                </div>
                 <div className="tasks-list">{renderTaskLists()}</div>
             </div>
         </Fragment>
