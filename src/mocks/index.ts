@@ -9,8 +9,8 @@ export const mockTasks: TaskInterface[] = [
     },
     {
         id: 2,
-        title: "Learn Redux",
-        description: "The store, actions, and reducers, oh my!",
+        title: "Learn TypeScript",
+        description: "Make less mistakes, be safe with type safety",
         status: "In Progress",
     },
 ];
