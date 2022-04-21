@@ -1,23 +1,24 @@
 import { TaskInterface } from "../../components/types";
-import { mockTasks } from "../../mocks";
 import { TasksActions } from "../actions/tasks-actions";
-import { CreateTaskAction, UpdateTaskAction } from "../creators/tasks-creators";
+import { CreateTaskAction, FetchTasksAction, UpdateTaskAction } from "../creators/tasks-creators";
 
-type State = {
+export type State = {
     tasks: TaskInterface[]
 }
 
 const initState: State = {
-    tasks: mockTasks
+    tasks: []
 }
 
 type Actions =
     CreateTaskAction |
-    UpdateTaskAction
+    UpdateTaskAction |
+    FetchTasksAction
 
-    
+
 export default function tasks(state = initState, action: Actions): State {
     const { type, payload } = action
+
     switch (type) {
         case TasksActions.CREATE_TASK: return {
             tasks: state.tasks.concat(payload)
@@ -29,6 +30,9 @@ export default function tasks(state = initState, action: Actions): State {
                 }
                 return task
             })
+        }
+        case TasksActions.FETCH_TASKS: return {
+            tasks: payload
         }
         default: return state
     }
