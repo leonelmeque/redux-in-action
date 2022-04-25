@@ -1,5 +1,7 @@
+
+export type TaskID = number | string
 export interface TaskInterface {
-    id?: string | number
+    id?: TaskID
     description: string
     title: string
     status?: string

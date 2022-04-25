@@ -1,5 +1,5 @@
 import { ChangeEvent, Fragment, FunctionComponent, useState } from "react";
-import { TASK_STATUSES } from "../lib/helpers";
+import { TASK_STATUSES, uniqueId } from "../lib/helpers";
 import TaskList from "./TaskList";
 import { TaskInterface } from "./types";
 
@@ -30,6 +30,8 @@ const TasksPage: FunctionComponent<TasksPageProps> = ({
         onCreateTask({
             title: state?.title,
             description: state?.description,
+            status: "Unstarted",
+            id: uniqueId(),
         });
         resetForm();
     };
@@ -66,7 +68,7 @@ const TasksPage: FunctionComponent<TasksPageProps> = ({
             <div className="tasks">
                 <div className="flex items-center justify-between my-4">
                     <h2 className="text-2xl">
-                      {!state?.showNewCardForm ? 'Your Tasks' : 'Add a new task'}
+                        {!state?.showNewCardForm ? "Your Tasks" : "Add a new task"}
                     </h2>
                     <button
                         className="py-3 px-4 bg-black rounded-sm text-white font-bold"

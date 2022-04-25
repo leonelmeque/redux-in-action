@@ -1,27 +1,35 @@
-import { FunctionComponent, useEffect, useState } from "react";
+import { FunctionComponent, useEffect } from "react";
 import { connect, ConnectedProps } from "react-redux";
 import { AnyAction } from "redux";
 import { ThunkDispatch } from "redux-thunk";
 import "./App.css";
 import TasksPage from "./components/TasksPage";
 import { TaskInterface } from "./components/types";
-import { asyncFetchTasks, createTask, updateTask } from "./redux/creators/tasks-creators";
+import {
+    asyncFetchTasks,
+    asyncCreateTask,
+    updateTask,
+    asyncUpdateTask,
+} from "./redux/creators/tasks-creators-server";
 import { State } from "./redux/reducers/tasks-reducer";
 
-function mapStateToProps(state: State) {
-    return {
-        tasks: state.tasks,
-    };
-}
+type RootState = {
+    tasks: State;
+};
 
-function mapDispatchToProps(dispatch: ThunkDispatch<State, void, AnyAction>) {
+const mapStateToProps = (state: RootState) => {
+    const { isLoading, tasks } = state.tasks;
     return {
-        createTask: ({
-            title,
-            description,
-        }: Pick<TaskInterface, "title" | "description">) =>
-            dispatch(createTask({ title, description })),
-        updateTask: (id: number, params: any) => dispatch(updateTask({ id, params })),
+        isLoading,
+        tasks,
+    };
+};
+
+function mapDispatchToProps(dispatch: ThunkDispatch<RootState, void, AnyAction>) {
+    return {
+        createTask: (params: TaskInterface) => dispatch(asyncCreateTask(params)),
+        updateTask: (id: number, params: TaskInterface) =>
+            dispatch(asyncUpdateTask({ id, params })),
         fetchTasks: () => dispatch(asyncFetchTasks()),
     };
 }
@@ -32,12 +40,13 @@ type ReduxProps = ConnectedProps<typeof connector>;
 
 const App: FunctionComponent<ReduxProps> = ({
     tasks,
+    isLoading,
     createTask,
     updateTask,
     fetchTasks,
 }) => {
-    const onCreateTask = ({ title, description }: any) => {
-        createTask({ title, description });
+    const onCreateTask = (params: TaskInterface) => {
+        createTask(params);
     };
 
     const onStatusChange = (id: number, params: any) => {
@@ -45,20 +54,20 @@ const App: FunctionComponent<ReduxProps> = ({
     };
 
     useEffect(() => {
-        // @ts-ignore
-        if (tasks.tasks.length === 0) fetchTasks();
-        return () => {
-            // @ts-ignore
-            console.log("Unmounting component with ", tasks.tasks);
-        };
+        if (!tasks.length) fetchTasks();
     });
-    // @ts-ignore
-    if (tasks.tasks.length === 0) return <>loading</>;
+
+    if (isLoading)
+        return (
+            <div className="flex text-center max-w-4xl mx-auto items-center justify-center h-max">
+                <p className="font-bold text-2xls">Loading data...</p>
+            </div>
+        );
+
     return (
         <div className="max-w-4xl mx-auto">
             <TasksPage
-            // @ts-ignore
-                tasks={tasks.tasks}
+                tasks={tasks}
                 onCreateTask={onCreateTask}
                 onStatusChange={onStatusChange}
             />
