@@ -43,7 +43,6 @@ export const asyncUpdateTask = ({ id, params }: { id: TaskID, params: TaskInterf
     })
 }
 
-
 export const fetchTasksSucceeded = (tasks: TaskInterface[]): FetchTasksAction => ({
     type: TasksActions.FETCH_TASKS,
     payload: tasks

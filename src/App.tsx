@@ -56,11 +56,7 @@ const App: FunctionComponent<ReduxProps> = ({
     };
 
     useEffect(() => {
-        console.log("Mounting app");
         fetchTasks();
-        return () => {
-            console.log("Unmounting App");
-        };
     }, [fetchTasks]);
 
     if (isLoading)
