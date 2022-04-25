@@ -21,7 +21,7 @@
     {
       "title": "Learn Terraform",
       "description": "Iac is good, saves time!",
-      "status": "Unstarted",
+      "status": "Completed",
       "id": "1itr5"
     },
     {
@@ -29,6 +29,18 @@
       "description": "Learn Advance CSS3 with CSS Visual Dictionary",
       "status": "Unstarted",
       "id": "a2gnt"
+    },
+    {
+      "title": "Game",
+      "description": "Zone",
+      "status": "Unstarted",
+      "id": "jvhs5"
+    },
+    {
+      "title": "New task",
+      "description": "hmmmm",
+      "status": "Unstarted",
+      "id": "h725h"
     }
   ]
 }

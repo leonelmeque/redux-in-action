@@ -1,22 +1,24 @@
 import { TaskInterface } from "../../components/types";
-import { TasksActions } from "../actions/tasks-actions";
-import { CreateTaskAction, FetchTasksAction, FetchTasksStartedAction, UpdateTaskAction } from "../creators/tasks-creators-server";
+import { CreateTaskAction, FetchTasksAction, FetchTasksErrorAction, FetchTasksStartedAction, TasksActions, UpdateTaskAction } from "../actions/tasks-actions";
 
 export type State = {
     isLoading?: boolean,
-    tasks: TaskInterface[] 
+    error?: string | undefined,
+    tasks: TaskInterface[]
 }
 
 const initState: State = {
     isLoading: false,
-    tasks: []
+    tasks: [],
+    error: undefined
 }
 
 type Actions =
     CreateTaskAction |
     UpdateTaskAction |
     FetchTasksAction |
-    FetchTasksStartedAction
+    FetchTasksStartedAction |
+    FetchTasksErrorAction
 
 
 export default function tasks(state = initState, action: Actions): State {
@@ -25,6 +27,11 @@ export default function tasks(state = initState, action: Actions): State {
         case TasksActions.FETCH_TASKS_STARTED: return {
             ...state,
             isLoading: true
+        }
+        case TasksActions.FETCH_TASKS_ERROR: return {
+            ...state,
+            isLoading: false,
+            error: payload
         }
         case TasksActions.CREATE_TASK: return {
             ...state,

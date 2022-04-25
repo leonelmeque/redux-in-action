@@ -1,22 +1,20 @@
 import { Dispatch } from "redux"
 import { TaskID, TaskInterface } from "../../components/types"
-import { TasksActions } from "../actions/tasks-actions"
+import { CreateTaskAction, FetchTasksAction, FetchTasksErrorAction, FetchTasksStartedAction, TasksActions, UpdateTaskAction } from "../actions/tasks-actions"
 import * as api from '../../lib/api'
 import { RootState } from ".."
 
-export type FetchTasksStartedAction = {
-    type: TasksActions.FETCH_TASKS_STARTED,
-    [key: string]: any
-}
 
 export const fetchTasksStarted = (): FetchTasksStartedAction => ({
-    type: TasksActions.FETCH_TASKS_STARTED
+    type: TasksActions.FETCH_TASKS_STARTED,
+   
 })
 
-export type CreateTaskAction = {
-    type: TasksActions.CREATE_TASK,
-    payload: TaskInterface
-}
+export const fetchTasksError = (errorMessage: string): FetchTasksErrorAction => ({
+    type: TasksActions.FETCH_TASKS_ERROR,
+    payload: errorMessage
+})
+
 export const createTaskSucceeded = (payload: TaskInterface): CreateTaskAction => ({
     type: TasksActions.CREATE_TASK,
     payload
@@ -27,13 +25,6 @@ export const asyncCreateTask = (params: TaskInterface) => (dispatch: Dispatch) =
     api.createTask(params).then((res) => {
         if (res.status <= 203) dispatch(createTaskSucceeded(params))
     })
-}
-
-export type UpdateTaskAction = {
-    type: TasksActions.UPDATE_TASK,
-    payload: {
-        task: TaskInterface
-    }
 }
 
 export const updateTask = (task: TaskInterface): UpdateTaskAction => ({
@@ -52,10 +43,6 @@ export const asyncUpdateTask = ({ id, params }: { id: TaskID, params: TaskInterf
     })
 }
 
-export type FetchTasksAction = {
-    type: TasksActions.FETCH_TASKS,
-    payload: TaskInterface[]
-}
 
 export const fetchTasksSucceeded = (tasks: TaskInterface[]): FetchTasksAction => ({
     type: TasksActions.FETCH_TASKS,
@@ -66,6 +53,8 @@ export const fetchTasksSucceeded = (tasks: TaskInterface[]): FetchTasksAction =>
 export const asyncFetchTasks = () => (dispatch: Dispatch) => {
     dispatch(fetchTasksStarted())
     api.fetchTasks().then(res => {
-        dispatch(fetchTasksSucceeded(res.data))
+        if (res.status < 203) dispatch(fetchTasksSucceeded(res.data))
+    }).catch((e)=>{
+        dispatch(fetchTasksError(e.message))
     })
 }

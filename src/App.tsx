@@ -3,12 +3,12 @@ import { connect, ConnectedProps } from "react-redux";
 import { AnyAction } from "redux";
 import { ThunkDispatch } from "redux-thunk";
 import "./App.css";
+import FlashMessage from "./components/FlashMessage";
 import TasksPage from "./components/TasksPage";
 import { TaskInterface } from "./components/types";
 import {
     asyncFetchTasks,
     asyncCreateTask,
-    updateTask,
     asyncUpdateTask,
 } from "./redux/creators/tasks-creators-server";
 import { State } from "./redux/reducers/tasks-reducer";
@@ -18,10 +18,11 @@ type RootState = {
 };
 
 const mapStateToProps = (state: RootState) => {
-    const { isLoading, tasks } = state.tasks;
+    const { isLoading, tasks, error } = state.tasks;
     return {
         isLoading,
         tasks,
+        error,
     };
 };
 
@@ -41,6 +42,7 @@ type ReduxProps = ConnectedProps<typeof connector>;
 const App: FunctionComponent<ReduxProps> = ({
     tasks,
     isLoading,
+    error,
     createTask,
     updateTask,
     fetchTasks,
@@ -54,8 +56,12 @@ const App: FunctionComponent<ReduxProps> = ({
     };
 
     useEffect(() => {
-        if (!tasks.length) fetchTasks();
-    });
+        console.log("Mounting app");
+        fetchTasks();
+        return () => {
+            console.log("Unmounting App");
+        };
+    }, [fetchTasks]);
 
     if (isLoading)
         return (
@@ -66,6 +72,8 @@ const App: FunctionComponent<ReduxProps> = ({
 
     return (
         <div className="max-w-4xl mx-auto">
+            {error && <FlashMessage message={error} />}
+            {!tasks.length && !isLoading && <div>No tasks where found</div>}
             <TasksPage
                 tasks={tasks}
                 onCreateTask={onCreateTask}

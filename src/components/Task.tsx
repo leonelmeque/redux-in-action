@@ -1,5 +1,6 @@
 import { ChangeEvent } from "react";
 import { TASK_STATUSES } from "../lib/helpers";
+import FlashMessage from "./FlashMessage";
 import { TaskInterface } from "./types";
 
 const container = "flex flex-col gap-2 cursor-pointer border-[1px] relative";
