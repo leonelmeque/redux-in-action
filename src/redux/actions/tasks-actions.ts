@@ -1,4 +1,4 @@
-import { TaskInterface } from "../../components/types"
+import { Analytics, TaskInterface } from "../../components/types"
 
 export enum TasksActions {
     CREATE_TASK = 'CREATE_TASK',
@@ -20,7 +20,10 @@ export type FetchTasksStartedAction = {
 
 export type CreateTaskAction = {
     type: TasksActions.CREATE_TASK,
-    payload: TaskInterface
+    payload: TaskInterface,
+    meta: {
+        analytics: Analytics
+    }
 }
 
 export type UpdateTaskAction = {

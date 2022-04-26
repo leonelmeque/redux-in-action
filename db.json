@@ -4,7 +4,7 @@
       "id": 1,
       "title": "Learn Redux",
       "description": "The store, actions, and reducers, oh my!",
-      "status": "In Progress"
+      "status": "Completed"
     },
     {
       "id": 2,
@@ -15,7 +15,7 @@
     {
       "title": "Learn Redux Thunk",
       "description": "In order to understand how to make async calls ",
-      "status": "Unstarted",
+      "status": "In Progress",
       "id": "nrbm"
     },
     {
@@ -27,20 +27,114 @@
     {
       "title": "Learn CSS3",
       "description": "Learn Advance CSS3 with CSS Visual Dictionary",
-      "status": "Unstarted",
+      "status": "In Progress",
       "id": "a2gnt"
     },
     {
       "title": "Game",
       "description": "Zone",
-      "status": "Unstarted",
+      "status": "Completed",
       "id": "jvhs5"
     },
     {
       "title": "New task",
       "description": "hmmmm",
-      "status": "Unstarted",
+      "status": "Completed",
       "id": "h725h"
+    },
+    {
+      "title": "Learn Kubernetes",
+      "description": "Kubernetes is complicated, but sure, everyone can learn",
+      "status": "Unstarted",
+      "id": "8e555"
+    },
+    {
+      "title": "Android development",
+      "description": "hmm, react native maybe?",
+      "status": "Unstarted",
+      "id": "arcs3h"
+    },
+    {
+      "title": "React Native",
+      "description": "Build apps and get rich",
+      "status": "Unstarted",
+      "id": "xfc2c"
+    },
+    {
+      "title": "Testing",
+      "description": "tested",
+      "status": "Unstarted",
+      "id": "44vgbk"
+    },
+    {
+      "title": "Deleting stuff",
+      "description": "hmm",
+      "status": "Unstarted",
+      "id": "tuicr"
+    },
+    {
+      "title": "asd",
+      "description": "asdasd",
+      "status": "Unstarted",
+      "id": "qmm8i"
+    },
+    {
+      "title": "asdas",
+      "description": "dasdas",
+      "status": "Unstarted",
+      "id": "2wsrh"
+    },
+    {
+      "title": "asdas",
+      "description": "dasdas",
+      "status": "Unstarted",
+      "id": "dbx6nj"
+    },
+    {
+      "title": "wewe",
+      "description": "werwe",
+      "status": "Unstarted",
+      "id": "klkmn"
+    },
+    {
+      "title": "asda",
+      "description": "ewerwe",
+      "status": "Unstarted",
+      "id": "fz5lc"
+    },
+    {
+      "title": "ewerwer",
+      "description": "werwer",
+      "status": "Unstarted",
+      "id": "wrqs8i"
+    },
+    {
+      "title": "sdasd",
+      "description": "sadsasd",
+      "status": "Unstarted",
+      "id": "b7b9l"
+    },
+    {
+      "title": "pppp",
+      "description": "ppppp",
+      "status": "Unstarted",
+      "id": "rzkttf"
+    }
+  ],
+  "analytics": [
+    {
+      "event": "CREATE_TASK",
+      "data": {
+        "id": "b7b9l"
+      },
+      "id": 1
+    },
+    {
+      "event": "CREATE_TASK",
+      "data": {
+        "id": "rzkttf"
+      },
+      "id": 2
     }
   ]
 }

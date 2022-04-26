@@ -6,3 +6,10 @@ export interface TaskInterface {
     title: string
     status?: string
 }
+
+export type Analytics = {
+    event: string,
+    data: {
+        id: string | number
+    }
+}

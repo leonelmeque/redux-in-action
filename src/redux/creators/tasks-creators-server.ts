@@ -7,7 +7,7 @@ import { RootState } from ".."
 
 export const fetchTasksStarted = (): FetchTasksStartedAction => ({
     type: TasksActions.FETCH_TASKS_STARTED,
-   
+
 })
 
 export const fetchTasksError = (errorMessage: string): FetchTasksErrorAction => ({
@@ -17,7 +17,15 @@ export const fetchTasksError = (errorMessage: string): FetchTasksErrorAction => 
 
 export const createTaskSucceeded = (payload: TaskInterface): CreateTaskAction => ({
     type: TasksActions.CREATE_TASK,
-    payload
+    payload,
+    meta: {
+        analytics: {
+            event: TasksActions.CREATE_TASK,
+            data: {
+                id: payload.id as string
+            }
+        }
+    }
 })
 
 export const asyncCreateTask = (params: TaskInterface) => (dispatch: Dispatch) => {
@@ -53,7 +61,7 @@ export const asyncFetchTasks = () => (dispatch: Dispatch) => {
     dispatch(fetchTasksStarted())
     api.fetchTasks().then(res => {
         if (res.status < 203) dispatch(fetchTasksSucceeded(res.data))
-    }).catch((e)=>{
+    }).catch((e) => {
         dispatch(fetchTasksError(e.message))
     })
 }
