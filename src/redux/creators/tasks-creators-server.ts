@@ -1,4 +1,4 @@
-import { Dispatch } from "redux"
+import { AnyAction, Dispatch } from "redux"
 import { TaskID, TaskInterface } from "../../components/types"
 import { CreateTasksActions, FetchTasksActions, UpdateTasksActions, TaskActions } from "../actions/tasks-actions"
 import * as api from '../../lib/api'
@@ -21,7 +21,7 @@ import { CALL_API } from "../middleware/api"
 
 export const fetchTasksStarted = (): FetchTasksActions => ({
     type: TaskActions.FETCH_TASKS_STARTED,
-    payload:{}
+    payload: {}
 })
 
 export const fetchTasksError = (errorMessage: string): FetchTasksActions => ({
@@ -33,7 +33,7 @@ export const fetchTasksError = (errorMessage: string): FetchTasksActions => ({
 
 export const createTaskSucceeded = (task: TaskInterface): CreateTasksActions => ({
     type: TaskActions.CREATE_TASK_SUCCEEDED,
-    payload:{task},
+    payload: { task },
     meta: {
         analytics: {
             event: TaskActions.CREATE_TASK_SUCCEEDED,
@@ -69,15 +69,32 @@ export const asyncUpdateTask = ({ id, params }: { id: TaskID, params: TaskInterf
 
 export const fetchTasksSucceeded = (tasks: TaskInterface[]): FetchTasksActions => ({
     type: TaskActions.FETCH_TASKS_SUCCEEDED,
-    payload: {tasks}
+    payload: { tasks }
 
 })
 
 export const asyncFetchTasks = () => (dispatch: Dispatch) => {
-    dispatch(fetchTasksStarted())
     api.fetchTasks().then(res => {
         if (res.status < 203) dispatch(fetchTasksSucceeded(res.data))
     }).catch((e) => {
         dispatch(fetchTasksError(e.message))
     })
 }
+
+// export const fetchTasks = () => {
+//     api.fetchTasks().then(res => {
+//         if (res.status < 203) {
+//             return {
+//                 type: TaskActions.FETCH_TASKS_SUCCEEDED,
+//                 payload: { tasks: res.data }
+//             }
+//         }
+//     }).catch((e) => {
+//         return {
+//             type: TaskActions.FETCH_TASKS_ERROR,
+//             payload: {
+//                 error: e.message
+//             }
+//         }
+//     })
+// }

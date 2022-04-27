@@ -1,5 +1,5 @@
 import { FunctionComponent, useEffect } from "react";
-import { connect, ConnectedProps } from "react-redux";
+import { connect, ConnectedProps, useDispatch } from "react-redux";
 import { AnyAction } from "redux";
 import { ThunkDispatch } from "redux-thunk";
 import "./App.css";
@@ -10,6 +10,7 @@ import {
     asyncFetchTasks,
     asyncCreateTask,
     asyncUpdateTask,
+    fetchTasksStarted,
 } from "./redux/creators/tasks-creators-server";
 import { State } from "./redux/reducers/tasks-reducer";
 
@@ -44,9 +45,12 @@ const App: FunctionComponent<ReduxProps> = ({
     isLoading,
     error,
     createTask,
+    fetchTasks: asyncFetchTasks,
     updateTask,
-    fetchTasks,
+  
 }) => {
+
+    const dispatch = useDispatch()
     const onCreateTask = (params: TaskInterface) => {
         createTask(params);
     };
@@ -56,8 +60,9 @@ const App: FunctionComponent<ReduxProps> = ({
     };
 
     useEffect(() => {
-        fetchTasks();
-    }, [fetchTasks]);
+        dispatch(fetchTasksStarted());
+        // asyncFetchTasks()
+    }, []);
 
     if (isLoading)
         return (

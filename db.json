@@ -57,25 +57,25 @@
     {
       "title": "React Native",
       "description": "Build apps and get rich",
-      "status": "Unstarted",
+      "status": "Completed",
       "id": "xfc2c"
     },
     {
       "title": "Testing",
       "description": "tested",
-      "status": "Unstarted",
+      "status": "In Progress",
       "id": "44vgbk"
     },
     {
       "title": "Deleting stuff",
       "description": "hmm",
-      "status": "Unstarted",
+      "status": "In Progress",
       "id": "tuicr"
     },
     {
       "title": "asd",
       "description": "asdasd",
-      "status": "Unstarted",
+      "status": "Completed",
       "id": "qmm8i"
     },
     {
@@ -119,6 +119,12 @@
       "description": "ppppp",
       "status": "Unstarted",
       "id": "rzkttf"
+    },
+    {
+      "title": "New task",
+      "description": "ooheleaaah",
+      "status": "Unstarted",
+      "id": "wh5s"
     }
   ],
   "analytics": [
@@ -135,6 +141,13 @@
         "id": "rzkttf"
       },
       "id": 2
+    },
+    {
+      "event": "CREATE_TASK_SUCCEEDED",
+      "data": {
+        "id": "wh5s"
+      },
+      "id": 3
     }
   ]
 }
