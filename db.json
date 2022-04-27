@@ -45,13 +45,13 @@
     {
       "title": "Learn Kubernetes",
       "description": "Kubernetes is complicated, but sure, everyone can learn",
-      "status": "Unstarted",
+      "status": "In Progress",
       "id": "8e555"
     },
     {
       "title": "Android development",
       "description": "hmm, react native maybe?",
-      "status": "Unstarted",
+      "status": "Completed",
       "id": "arcs3h"
     },
     {

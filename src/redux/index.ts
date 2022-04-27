@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
 import thunk from 'redux-thunk'
-import { analytics, logger } from "./middleware";
+import { analytics, api, logger } from "./middleware";
 import tasks from './reducers/tasks-reducer'
 
 const reducers = combineReducers({
@@ -11,7 +11,7 @@ const reducers = combineReducers({
 const store = configureStore({
     reducer: reducers,
     devTools: true,
-    middleware:[thunk, logger, analytics]
+    middleware: [thunk, api, logger, analytics]
 })
 
 export type RootState = ReturnType<typeof store.getState>

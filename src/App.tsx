@@ -69,9 +69,9 @@ const App: FunctionComponent<ReduxProps> = ({
     return (
         <div className="max-w-4xl mx-auto">
             {error && <FlashMessage message={error} />}
-            {!tasks.length && !isLoading && <div>No tasks where found</div>}
+            {!tasks?.length && !isLoading && <div>No tasks where found</div>}
             <TasksPage
-                tasks={tasks}
+                tasks={tasks || []}
                 onCreateTask={onCreateTask}
                 onStatusChange={onStatusChange}
             />

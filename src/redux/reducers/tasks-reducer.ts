@@ -1,10 +1,10 @@
 import { TaskInterface } from "../../components/types";
-import { CreateTaskAction, FetchTasksAction, FetchTasksErrorAction, FetchTasksStartedAction, TasksActions, UpdateTaskAction } from "../actions/tasks-actions";
+import { CombinedTaskActions, TaskActions } from "../actions/tasks-actions";
 
 export type State = {
     isLoading?: boolean,
     error?: string | undefined,
-    tasks: TaskInterface[]
+    tasks: TaskInterface[] | undefined
 }
 
 const initState: State = {
@@ -13,34 +13,36 @@ const initState: State = {
     error: undefined
 }
 
-type Actions =
-    CreateTaskAction |
-    UpdateTaskAction |
-    FetchTasksAction |
-    FetchTasksStartedAction |
-    FetchTasksErrorAction
-
-
-export default function tasks(state = initState, action: Actions): State {
+export default function tasks(state = initState, action: CombinedTaskActions): State {
     const { type, payload } = action
     switch (type) {
-        case TasksActions.FETCH_TASKS_STARTED: return {
+        case TaskActions.FETCH_TASKS_STARTED: return {
             ...state,
             isLoading: true
         }
-        case TasksActions.FETCH_TASKS_ERROR: return {
+        case TaskActions.FETCH_TASKS_ERROR: return {
             ...state,
             isLoading: false,
-            error: payload
+            error: payload.error
         }
-        case TasksActions.CREATE_TASK: return {
+        case TaskActions.FETCH_TASKS_SUCCEEDED: return {
             ...state,
             isLoading: false,
-            tasks: state.tasks.concat(payload)
+            tasks: payload.tasks
         }
-        case TasksActions.UPDATE_TASK: {
-            const newTasks = state.tasks.map(task => {
-                if (task.id === payload.task.id) {
+        case TaskActions.CREATE_TASK_SUCCEEDED: return {
+            ...state,
+            isLoading: false,
+            tasks: state.tasks?.concat(payload?.task || [])
+        }
+        case TaskActions.CREATE_TASK_FAILED: return {
+            ...state,
+            isLoading: false,
+            error: payload.error
+        }
+        case TaskActions.UPDATE_TASKS_SUCCEEDED: {
+            const newTasks = state.tasks?.map(task => {
+                if (task.id === payload.task?.id) {
                     return Object.assign({}, task, payload.task)
                 }
                 return task
@@ -50,10 +52,11 @@ export default function tasks(state = initState, action: Actions): State {
                 tasks: newTasks
             }
         }
-        case TasksActions.FETCH_TASKS: return {
-            ...state,
-            isLoading: false,
-            tasks: payload
+        case TaskActions.UPDATE_TASKS_ERROR: {
+            return {
+                ...state,
+                error: payload.error
+            }
         }
         default: return state
     }
