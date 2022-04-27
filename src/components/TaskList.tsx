@@ -8,8 +8,9 @@ interface TaskListProps {
     onStatusChange:(...args:any)=>void
 }
 
-const TaskList: FunctionComponent<TaskListProps> = ({ tasks, onStatusChange }) => (
-    <div className="task-list">
+const TaskList: FunctionComponent<TaskListProps> = ({ tasks, onStatusChange, status }) => (
+    <div className="flex-1">
+        <h1 className="text-xl font-bold">{status}</h1>
         {tasks.map((task) => (
             <Task key={`${task.id}`} task={task} updateStatus={onStatusChange} />
         ))}

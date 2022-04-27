@@ -18,25 +18,25 @@ const Task = ({
     };
 
     return (
-        <div className={`${container} bg-white rounded p-4 my-2`}>
-            <div className="task-header">
-                <h2 className="font-bold text-lg">{task.title}</h2>
+        <div className={`${container} bg-white rounded my-2 hover:bg-slate-300 transition delay-75 ease-in-out`}>
+            <div className="flex justify-between p-4 border-b-slate-200 border-b-[1px]">
+                <h2 className="font-semibold text-base">{task.title}</h2>
+                <div className="flex justify-end">
+                    <select
+                        className="border-[1px] p-1 rounded text-xs font-bold "
+                        name="task-status"
+                        id="task-status"
+                        defaultValue={task.status}
+                        onChange={onStatusChange}>
+                        {TASK_STATUSES.map((status, index) => (
+                            <option key={`task-status-${index}`} value={status}>
+                                {status}
+                            </option>
+                        ))}
+                    </select>
+                </div>
             </div>
-            <div className="text-sm">{task.description}</div>
-            <div className="flex justify-end">
-                <select
-                    className="absolute top-1/2 right-4 -translate-y-1/2 border-[1px] p-2 rounded font-bold"
-                    name="task-status"
-                    id="task-status"
-                    defaultValue={task.status}
-                    onChange={onStatusChange}>
-                    {TASK_STATUSES.map((status, index) => (
-                        <option key={`task-status-${index}`} value={status}>
-                            {status}
-                        </option>
-                    ))}
-                </select>
-            </div>
+            <div className="text-sm p-4">{task.description}</div>
         </div>
     );
 };

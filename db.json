@@ -4,18 +4,18 @@
       "id": 1,
       "title": "Learn Redux",
       "description": "The store, actions, and reducers, oh my!",
-      "status": "Completed"
+      "status": "In Progress"
     },
     {
       "id": 2,
       "title": "Learn TypeScript",
       "description": "Make less mistakes, be safe with type safety",
-      "status": "Completed"
+      "status": "Unstarted"
     },
     {
       "title": "Learn Redux Thunk",
       "description": "In order to understand how to make async calls ",
-      "status": "In Progress",
+      "status": "Unstarted",
       "id": "nrbm"
     },
     {
@@ -29,102 +29,6 @@
       "description": "Learn Advance CSS3 with CSS Visual Dictionary",
       "status": "In Progress",
       "id": "a2gnt"
-    },
-    {
-      "title": "Game",
-      "description": "Zone",
-      "status": "Completed",
-      "id": "jvhs5"
-    },
-    {
-      "title": "New task",
-      "description": "hmmmm",
-      "status": "Completed",
-      "id": "h725h"
-    },
-    {
-      "title": "Learn Kubernetes",
-      "description": "Kubernetes is complicated, but sure, everyone can learn",
-      "status": "In Progress",
-      "id": "8e555"
-    },
-    {
-      "title": "Android development",
-      "description": "hmm, react native maybe?",
-      "status": "Completed",
-      "id": "arcs3h"
-    },
-    {
-      "title": "React Native",
-      "description": "Build apps and get rich",
-      "status": "Completed",
-      "id": "xfc2c"
-    },
-    {
-      "title": "Testing",
-      "description": "tested",
-      "status": "In Progress",
-      "id": "44vgbk"
-    },
-    {
-      "title": "Deleting stuff",
-      "description": "hmm",
-      "status": "In Progress",
-      "id": "tuicr"
-    },
-    {
-      "title": "asd",
-      "description": "asdasd",
-      "status": "Completed",
-      "id": "qmm8i"
-    },
-    {
-      "title": "asdas",
-      "description": "dasdas",
-      "status": "Unstarted",
-      "id": "2wsrh"
-    },
-    {
-      "title": "asdas",
-      "description": "dasdas",
-      "status": "Unstarted",
-      "id": "dbx6nj"
-    },
-    {
-      "title": "wewe",
-      "description": "werwe",
-      "status": "Unstarted",
-      "id": "klkmn"
-    },
-    {
-      "title": "asda",
-      "description": "ewerwe",
-      "status": "Unstarted",
-      "id": "fz5lc"
-    },
-    {
-      "title": "ewerwer",
-      "description": "werwer",
-      "status": "Unstarted",
-      "id": "wrqs8i"
-    },
-    {
-      "title": "sdasd",
-      "description": "sadsasd",
-      "status": "Unstarted",
-      "id": "b7b9l"
-    },
-    {
-      "title": "pppp",
-      "description": "ppppp",
-      "status": "Unstarted",
-      "id": "rzkttf"
-    },
-    {
-      "title": "New task",
-      "description": "ooheleaaah",
-      "status": "Unstarted",
-      "id": "wh5s"
     }
   ],
   "analytics": [

@@ -50,18 +50,30 @@ const TasksPage: FunctionComponent<TasksPageProps> = ({
         });
     };
 
-    const renderTaskLists = () =>
-        TASK_STATUSES.map((status, index) => {
-            const statusTask = tasks.filter((task) => task.status === status);
-            return (
+    const renderTaskLists = () => {
+        const unstarted = tasks.filter((task) => task.status === "Unstarted");
+        const completed = tasks.filter((task) => task.status === "Completed");
+        const inProgress = tasks.filter((task) => task.status === "In Progress");
+        return (
+            <div className="flex flex-row gap-4">
                 <TaskList
-                    key={`id-${index.toString()}`}
-                    status={status}
-                    tasks={statusTask}
+                    status="Unstarted"
+                    tasks={unstarted}
                     onStatusChange={onStatusChange}
                 />
-            );
-        });
+                <TaskList
+                    status="In Progress"
+                    tasks={inProgress}
+                    onStatusChange={onStatusChange}
+                />
+                <TaskList
+                    status="Completed"
+                    tasks={completed}
+                    onStatusChange={onStatusChange}
+                />
+            </div>
+        );
+    };
 
     return (
         <Fragment>
