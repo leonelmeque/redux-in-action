@@ -12,6 +12,7 @@ import {
     asyncUpdateTask,
     fetchTasksStarted,
 } from "./redux/creators/tasks-creators-server";
+import { filterTasks } from "./redux/creators/tasks-creators-ui";
 import { State } from "./redux/reducers/tasks-reducer";
 
 type RootState = {
@@ -19,7 +20,10 @@ type RootState = {
 };
 
 const mapStateToProps = (state: RootState) => {
-    const { isLoading, tasks, error } = state.tasks;
+    const { isLoading, error, searchTerm } = state.tasks;
+    const tasks = state.tasks.tasks?.filter(task=>{
+        return task.title.match(new RegExp(searchTerm as string, 'i'))
+    })
     return {
         isLoading,
         tasks,
@@ -47,10 +51,9 @@ const App: FunctionComponent<ReduxProps> = ({
     createTask,
     fetchTasks: asyncFetchTasks,
     updateTask,
-  
 }) => {
+    const dispatch = useDispatch();
 
-    const dispatch = useDispatch()
     const onCreateTask = (params: TaskInterface) => {
         createTask(params);
     };
@@ -59,9 +62,12 @@ const App: FunctionComponent<ReduxProps> = ({
         updateTask(id, params);
     };
 
+    const onSearch = (searchTerm:string)=>{
+        dispatch(filterTasks(searchTerm))
+    }
+
     useEffect(() => {
         dispatch(fetchTasksStarted());
-        // asyncFetchTasks()
     }, []);
 
     if (isLoading)
@@ -74,12 +80,13 @@ const App: FunctionComponent<ReduxProps> = ({
     return (
         <div className="max-w-4xl mx-auto">
             {error && <FlashMessage message={error} />}
-            {!tasks?.length && !isLoading && <div>No tasks where found</div>}
             <TasksPage
                 tasks={tasks || []}
                 onCreateTask={onCreateTask}
                 onStatusChange={onStatusChange}
+                onSearch= {onSearch}
             />
+            {!tasks?.length && !isLoading && <div>No tasks where found</div>}
         </div>
     );
 };

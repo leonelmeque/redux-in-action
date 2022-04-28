@@ -5,28 +5,28 @@
       "title": "Learn Redux",
       "description": "The store, actions, and reducers, oh my!",
       "status": "Completed",
-      "timer": 10
+      "timer": 38
     },
     {
       "id": 2,
       "title": "Learn TypeScript",
       "description": "Make less mistakes, be safe with type safety",
-      "status": "In Progress",
-      "timer": 63
+      "status": "Completed",
+      "timer": 901
     },
     {
       "title": "Learn Redux Thunk",
       "description": "In order to understand how to make async calls ",
       "status": "Unstarted",
       "id": "nrbm",
-      "timer": 0
+      "timer": 4
     },
     {
       "title": "Learn Terraform",
       "description": "Iac is good, saves time!",
-      "status": "Completed",
+      "status": "Unstarted",
       "id": "1itr5",
-      "timer": 0
+      "timer": 9
     },
     {
       "title": "Learn CSS3",
@@ -34,7 +34,22 @@
       "status": "Unstarted",
       "id": "a2gnt",
       "timer": 142
+    },
+    {
+      "title": "Play Video Games",
+      "description": "Spiderman, God of War",
+      "status": "Unstarted",
+      "id": "sfetp",
+      "timer": 3
     }
   ],
-  "analytics": []
+  "analytics": [
+    {
+      "event": "CREATE_TASK_SUCCEEDED",
+      "data": {
+        "id": "sfetp"
+      },
+      "id": 1
+    }
+  ]
 }

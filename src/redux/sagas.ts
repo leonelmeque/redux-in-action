@@ -1,7 +1,8 @@
-import { call, fork, put, takeLatest, takeEvery, delay, take, ActionPattern} from "redux-saga/effects"
+import { call, fork, put, takeLatest, delay, take,} from "redux-saga/effects"
 import {channel, Saga} from 'redux-saga'
 import * as api from '../lib/api'
 import { FetchTasksActions, TaskActions, TimerTasksActions } from "./actions/tasks-actions"
+
 /**
  * What’s fork doing here? When rootSaga executes, it’s going to pause at every yield statement until the side effect is completed.
  * The fork method, however, allows rootSaga to move onto the next yield without a resolution. 
@@ -11,8 +12,6 @@ import { FetchTasksActions, TaskActions, TimerTasksActions } from "./actions/tas
 export default function* rootSaga() {
     yield takeLatest(TaskActions.FETCH_TASKS_STARTED,fetchTasks) // takes the last FETCH_TASKS_STARTED and cancels to begin a new one
     yield takeLatestById([TaskActions.TIMER_STARTED, TaskActions.TIMER_STOP], handleProgressTimer)
-    console.log('rootSaga reporting for duty')
-
 }
 
 function* fetchTasks(){
@@ -60,28 +59,3 @@ function* takeLatestById(actionType:any, saga: Saga){
         yield put(channelsMap[taskId], action)
     }
 }
-
-// function* watchFetchTasks() {
-//     while (true) {
-//         console.log('started!')
-//         try {
-//             const { data } = yield call(api.fetchTasks)
-//             yield put<FetchTasksActions>({
-//                 type: TaskActions.FETCH_TASKS_SUCCEEDED,
-//                 payload: { tasks: data }
-//             })
-//         } catch (e: any) {
-//             yield put<FetchTasksActions>({
-//                 type: TaskActions.FETCH_TASKS_ERROR,
-//                 payload: {
-//                     error: e.message
-//                 }
-//             })
-//         }
-//     }
-// }
-
-// function* watchSomethingElse() {
-//     yield
-//     console.log('Watching something else!')
-// }

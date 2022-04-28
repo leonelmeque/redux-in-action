@@ -6,13 +6,15 @@ export type State = {
     error?: string | undefined,
     tasks: TaskInterface[] | undefined,
     timer: number
+    searchTerm?:string
 }
 
 const initState: State = {
     isLoading: false,
     tasks: [],
     error: undefined,
-    timer: 0
+    timer: 0,
+    searchTerm: ""
 }
 
 export default function tasks(state = initState, action: CombinedTaskActions): State {
@@ -68,6 +70,12 @@ export default function tasks(state = initState, action: CombinedTaskActions): S
             return {
                 ...state,
                 tasks: nextTasks
+            }
+        }
+        case TaskActions.FILTER_TASKS:{
+            return {
+                ...state,
+                searchTerm: payload
             }
         }
         default: return state

@@ -1,33 +1,34 @@
 import { Analytics, TaskInterface } from "../../components/types"
 
-export enum CreateTasksEnums {
+enum CreateTasksEnums {
     CREATE_TASK_STARTED = "CREATE_TASK_STARTED",
     CREATE_TASK_SUCCEEDED = "CREATE_TASK_SUCCEEDED",
     CREATE_TASK_FAILED = "CREATE_TASK_FAILED",
 }
 
-export enum FetchTasksEnums {
+enum FetchTasksEnums {
     FETCH_TASKS_SUCCEEDED = "FETCH_TASKS_SUCCEEDED",
     FETCH_TASKS_STARTED = "FETCH_TASKS_STARTED",
     FETCH_TASKS_ERROR = "FETCH_STASKS_ERROR",
 }
 
-export enum UpdateTasksEnums {
+enum UpdateTasksEnums {
     UPDATE_TASKS_SUCCEEDED = "UPDATE_TASKS_SUCCEEDED",
     UPDATE_TASKS_STARTED = "UPDATE_TASKS_STARTED",
     UPDATE_TASKS_ERROR = "UPDATE_STASKS_ERROR",
 }
 
-export enum TimerTasksEnums {
+enum TimerTasksEnums {
     TIMER_STARTED = "TIMER_STARTED",
     TIMER_STOP = "TIMER_STOP",
     TIMER_INCREMENT = "TIMER_INCREMENT"
 }
 
-// export type _TasksActions = CreateTasksEnums | FetchTasksEnums | UpdateTasksEnums
+enum SearchTasksEnum {
+    FILTER_TASKS = "FILTER_TASKS"
+}
 
-export const TaskActions = { ...CreateTasksEnums, ...FetchTasksEnums, ...UpdateTasksEnums, ...TimerTasksEnums }
-
+export const TaskActions = { ...CreateTasksEnums, ...FetchTasksEnums, ...UpdateTasksEnums, ...TimerTasksEnums, ...SearchTasksEnum }
 
 type TasksPayload = {
     tasks?: TaskInterface[]
@@ -60,5 +61,14 @@ export interface TimerTasksActions extends ExtendsActionType<TimerTasksEnums> {
     payload: Pick<TasksPayload, 'taskId'>
 }
 
-export type CombinedTaskActions = CreateTasksActions | FetchTasksActions | UpdateTasksActions | TimerTasksActions
+export interface SearchTasksActions extends ExtendsActionType<SearchTasksEnum> {
+    payload: string
+}
+
+export type CombinedTaskActions =
+    CreateTasksActions |
+    FetchTasksActions |
+    UpdateTasksActions |
+    TimerTasksActions |
+    SearchTasksActions
 

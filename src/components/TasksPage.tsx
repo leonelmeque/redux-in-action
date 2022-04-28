@@ -7,22 +7,30 @@ interface TasksPageProps {
     tasks: TaskInterface[];
     onCreateTask: (args: any) => void;
     onStatusChange: (...args: any) => void;
+    onSearch: (searchTerm: string) => void;
 }
+
+const initState = {
+    showNewCardForm: false,
+    title: "",
+    description: "",
+};
 
 const TasksPage: FunctionComponent<TasksPageProps> = ({
     tasks,
     onCreateTask,
     onStatusChange,
+    onSearch: _onSearch,
 }) => {
-    const [state, setState] = useState<{ [key: string]: any }>({
-        showNewCardForm: false,
-        title: "",
-        description: "",
-    });
+    const [state, setState] = useState<{ [key: string]: any }>(initState);
 
     const handleChange = ({ target: { name, value } }: ChangeEvent<HTMLInputElement>) => {
         const newState = { ...state, [name]: value };
         setState(newState);
+    };
+
+    const onSearch = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
+        _onSearch(value);
     };
 
     const _onCreateTask = (e: any) => {
@@ -82,12 +90,22 @@ const TasksPage: FunctionComponent<TasksPageProps> = ({
                     <h2 className="text-2xl">
                         {!state?.showNewCardForm ? "Your Tasks" : "Add a new task"}
                     </h2>
+                    <div>
+                        <input
+                            type="text"
+                            name="search"
+                            placeholder="Search task..."
+                            className="border-[1px] p-3 bg-white"
+                            onChange={onSearch}
+                        />
+                    </div>
                     <button
                         className="py-3 px-4 bg-black rounded-sm text-white font-bold"
                         onClick={toggleForm}>
                         + New Task
                     </button>
                 </div>
+
                 <div className="my-4">
                     {state?.showNewCardForm && (
                         <form className="flex gap-4 flex-col" onSubmit={_onCreateTask}>
