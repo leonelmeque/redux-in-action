@@ -13,20 +13,18 @@ import {
     fetchTasksStarted,
 } from "./redux/creators/tasks-creators-server";
 import { filterTasks } from "./redux/creators/tasks-creators-ui";
-import { State } from "./redux/reducers/tasks-reducer";
+import { getFilteredTasks, State } from "./redux/reducers/tasks-reducer";
 
 type RootState = {
     tasks: State;
 };
 
 const mapStateToProps = (state: RootState) => {
-    const { isLoading, error, searchTerm } = state.tasks;
-    const tasks = state.tasks.tasks?.filter(task=>{
-        return task.title.match(new RegExp(searchTerm as string, 'i'))
-    })
+    const { isLoading,tasks,error, searchTerm } = state.tasks;
+  
     return {
         isLoading,
-        tasks,
+        tasks: getFilteredTasks(tasks ?? [],searchTerm ?? ""),
         error,
     };
 };

@@ -6,7 +6,7 @@ export type State = {
     error?: string | undefined,
     tasks: TaskInterface[] | undefined,
     timer: number
-    searchTerm?:string
+    searchTerm?: string
 }
 
 const initState: State = {
@@ -15,6 +15,12 @@ const initState: State = {
     error: undefined,
     timer: 0,
     searchTerm: ""
+}
+
+export function getFilteredTasks(tasks: TaskInterface[], searchTerm: string) {
+    return tasks.filter(task => (
+        task.title.match(new RegExp(searchTerm, 'i'))
+    ))
 }
 
 export default function tasks(state = initState, action: CombinedTaskActions): State {
@@ -72,7 +78,7 @@ export default function tasks(state = initState, action: CombinedTaskActions): S
                 tasks: nextTasks
             }
         }
-        case TaskActions.FILTER_TASKS:{
+        case TaskActions.FILTER_TASKS: {
             return {
                 ...state,
                 searchTerm: payload
