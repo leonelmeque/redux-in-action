@@ -14,11 +14,12 @@ const Task = ({
 }) => {
     const onStatusChange = (e: ChangeEvent<HTMLSelectElement>) => {
         const { id, ...rest } = task;
-        updateStatus(id, {...rest, status:e.target.value});
+        updateStatus(id, { ...rest, status: e.target.value });
     };
 
     return (
-        <div className={`${container} bg-white rounded my-2 hover:bg-slate-300 transition delay-75 ease-in-out`}>
+        <div
+            className={`${container} bg-white rounded my-2 hover:bg-slate-300 transition delay-75 ease-in-out`}>
             <div className="flex justify-between p-4 border-b-slate-200 border-b-[1px]">
                 <h2 className="font-semibold text-base">{task.title}</h2>
                 <div className="flex justify-end">
@@ -36,7 +37,10 @@ const Task = ({
                     </select>
                 </div>
             </div>
-            <div className="text-sm p-4">{task.description}</div>
+            <div className="p-4">
+                <div className="text-sm ">{task.description}</div>
+                <div className="text-right">{task.timer}s</div>
+            </div>
         </div>
     );
 };

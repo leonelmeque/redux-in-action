@@ -24,6 +24,20 @@ export const fetchTasksStarted = (): FetchTasksActions => ({
     payload: {}
 })
 
+export const progressTimerStart = (taskId: string | number) => ({
+    type: TaskActions.TIMER_STARTED,
+    payload: {
+        taskId
+    }
+})
+
+export const progressTimerStop = (taskId: string | number) => ({
+    type: TaskActions.TIMER_STOP,
+    payload: {
+        taskId
+    }
+})
+
 export const fetchTasksError = (errorMessage: string): FetchTasksActions => ({
     type: TaskActions.FETCH_TASKS_ERROR,
     payload: {
@@ -64,6 +78,8 @@ export const asyncUpdateTask = ({ id, params }: { id: TaskID, params: TaskInterf
 
     api.updateTask(id, updatedTask).then((res) => {
         if (res.status < 203) dispatch(updateTask(updatedTask))
+        if (res.data.status === 'In Progress') dispatch(progressTimerStart(res.data.id))
+        if (task?.status === "In Progress") dispatch(progressTimerStop(res.data.id))
     })
 }
 
@@ -73,12 +89,13 @@ export const fetchTasksSucceeded = (tasks: TaskInterface[]): FetchTasksActions =
 
 })
 
-export const asyncFetchTasks = () => (dispatch: Dispatch) => {
-    api.fetchTasks().then(res => {
+export const asyncFetchTasks = () => async (dispatch: Dispatch) => {
+    try {
+        const res = await api.fetchTasks()
         if (res.status < 203) dispatch(fetchTasksSucceeded(res.data))
-    }).catch((e) => {
+    } catch (e: any) {
         dispatch(fetchTasksError(e.message))
-    })
+    }
 }
 
 // export const fetchTasks = () => {

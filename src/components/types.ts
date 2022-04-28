@@ -5,6 +5,7 @@ export interface TaskInterface {
     description: string
     title: string
     status?: string
+    timer?:number
 }
 
 export type Analytics = {

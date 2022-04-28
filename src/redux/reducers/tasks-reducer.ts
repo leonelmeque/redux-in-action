@@ -4,13 +4,15 @@ import { CombinedTaskActions, TaskActions } from "../actions/tasks-actions";
 export type State = {
     isLoading?: boolean,
     error?: string | undefined,
-    tasks: TaskInterface[] | undefined
+    tasks: TaskInterface[] | undefined,
+    timer: number
 }
 
 const initState: State = {
     isLoading: false,
     tasks: [],
-    error: undefined
+    error: undefined,
+    timer: 0
 }
 
 export default function tasks(state = initState, action: CombinedTaskActions): State {
@@ -56,6 +58,16 @@ export default function tasks(state = initState, action: CombinedTaskActions): S
             return {
                 ...state,
                 error: payload.error
+            }
+        }
+        case TaskActions.TIMER_INCREMENT: {
+            const nextTasks = state.tasks?.map(task => {
+                if (task.id === payload.taskId) return { ...task, timer: (task.timer ?? 0) + 1 }
+                return task
+            })
+            return {
+                ...state,
+                tasks: nextTasks
             }
         }
         default: return state

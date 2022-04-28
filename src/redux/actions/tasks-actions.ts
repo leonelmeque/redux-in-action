@@ -18,15 +18,22 @@ export enum UpdateTasksEnums {
     UPDATE_TASKS_ERROR = "UPDATE_STASKS_ERROR",
 }
 
+export enum TimerTasksEnums {
+    TIMER_STARTED = "TIMER_STARTED",
+    TIMER_STOP = "TIMER_STOP",
+    TIMER_INCREMENT = "TIMER_INCREMENT"
+}
+
 // export type _TasksActions = CreateTasksEnums | FetchTasksEnums | UpdateTasksEnums
 
-export const TaskActions = {...CreateTasksEnums, ...FetchTasksEnums, ...UpdateTasksEnums}
+export const TaskActions = { ...CreateTasksEnums, ...FetchTasksEnums, ...UpdateTasksEnums, ...TimerTasksEnums }
 
 
 type TasksPayload = {
-    tasks?: TaskInterface []
-    task?: TaskInterface 
+    tasks?: TaskInterface[]
+    task?: TaskInterface
     error?: string
+    taskId?: string | number
 }
 
 type Metadata = {
@@ -35,19 +42,23 @@ type Metadata = {
 export interface ExtendsActionType<T> {
     type: T
 }
-export interface CreateTasksActions extends ExtendsActionType<CreateTasksEnums>{
+export interface CreateTasksActions extends ExtendsActionType<CreateTasksEnums> {
     payload: Omit<TasksPayload, 'tasks'>
     meta?: Metadata
 }
 
-export interface FetchTasksActions extends ExtendsActionType<FetchTasksEnums>{
+export interface FetchTasksActions extends ExtendsActionType<FetchTasksEnums> {
     payload: Omit<TasksPayload, 'task'>
 }
 
-export interface UpdateTasksActions extends ExtendsActionType<UpdateTasksEnums>{
+export interface UpdateTasksActions extends ExtendsActionType<UpdateTasksEnums> {
     payload: Omit<TasksPayload, 'tasks'>
     meta?: Metadata
 }
 
-export type CombinedTaskActions = CreateTasksActions | FetchTasksActions | UpdateTasksActions
+export interface TimerTasksActions extends ExtendsActionType<TimerTasksEnums> {
+    payload: Pick<TasksPayload, 'taskId'>
+}
+
+export type CombinedTaskActions = CreateTasksActions | FetchTasksActions | UpdateTasksActions | TimerTasksActions
 

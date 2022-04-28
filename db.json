@@ -4,54 +4,37 @@
       "id": 1,
       "title": "Learn Redux",
       "description": "The store, actions, and reducers, oh my!",
-      "status": "In Progress"
+      "status": "Completed",
+      "timer": 10
     },
     {
       "id": 2,
       "title": "Learn TypeScript",
       "description": "Make less mistakes, be safe with type safety",
-      "status": "Unstarted"
+      "status": "In Progress",
+      "timer": 63
     },
     {
       "title": "Learn Redux Thunk",
       "description": "In order to understand how to make async calls ",
       "status": "Unstarted",
-      "id": "nrbm"
+      "id": "nrbm",
+      "timer": 0
     },
     {
       "title": "Learn Terraform",
       "description": "Iac is good, saves time!",
       "status": "Completed",
-      "id": "1itr5"
+      "id": "1itr5",
+      "timer": 0
     },
     {
       "title": "Learn CSS3",
       "description": "Learn Advance CSS3 with CSS Visual Dictionary",
-      "status": "In Progress",
-      "id": "a2gnt"
+      "status": "Unstarted",
+      "id": "a2gnt",
+      "timer": 142
     }
   ],
-  "analytics": [
-    {
-      "event": "CREATE_TASK",
-      "data": {
-        "id": "b7b9l"
-      },
-      "id": 1
-    },
-    {
-      "event": "CREATE_TASK",
-      "data": {
-        "id": "rzkttf"
-      },
-      "id": 2
-    },
-    {
-      "event": "CREATE_TASK_SUCCEEDED",
-      "data": {
-        "id": "wh5s"
-      },
-      "id": 3
-    }
-  ]
+  "analytics": []
 }
