@@ -1,4 +1,4 @@
-import { AnyAction, Dispatch } from "redux"
+import { Dispatch } from "redux"
 import { TaskID, TaskInterface } from "../../components/types"
 import { CreateTasksActions, FetchTasksActions, UpdateTasksActions, TaskActions } from "../actions/tasks-actions"
 import * as api from '../../lib/api'

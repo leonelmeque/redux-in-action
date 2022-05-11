@@ -1,10 +1,10 @@
 import { ChangeEvent, Fragment, FunctionComponent, useState } from "react";
-import { TASK_STATUSES, uniqueId } from "../lib/helpers";
+import { uniqueId } from "../lib/helpers";
 import TaskList from "./TaskList";
 import { TaskInterface } from "./types";
 
 interface TasksPageProps {
-    tasks: TaskInterface[];
+    tasks: {[key: string]: TaskInterface[] | undefined};
     onCreateTask: (args: any) => void;
     onStatusChange: (...args: any) => void;
     onSearch: (searchTerm: string) => void;
@@ -59,26 +59,21 @@ const TasksPage: FunctionComponent<TasksPageProps> = ({
     };
 
     const renderTaskLists = () => {
-        const unstarted = tasks.filter((task) => task.status === "Unstarted");
-        const completed = tasks.filter((task) => task.status === "Completed");
-        const inProgress = tasks.filter((task) => task.status === "In Progress");
-        return (
+  
+      return (
             <div className="flex flex-row gap-4">
-                <TaskList
-                    status="Unstarted"
-                    tasks={unstarted}
-                    onStatusChange={onStatusChange}
-                />
-                <TaskList
-                    status="In Progress"
-                    tasks={inProgress}
-                    onStatusChange={onStatusChange}
-                />
-                <TaskList
-                    status="Completed"
-                    tasks={completed}
-                    onStatusChange={onStatusChange}
-                />
+                {Object.keys(tasks).map((status) => {
+                    const tasksByStatus = tasks[status];
+
+                    return (
+                        <TaskList
+                            key={status}
+                            status={status}
+                            tasks={tasksByStatus}
+                            onStatusChange={onStatusChange}
+                        />
+                    );
+                })}
             </div>
         );
     };

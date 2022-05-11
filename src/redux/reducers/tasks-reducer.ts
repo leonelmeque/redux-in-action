@@ -1,5 +1,7 @@
 import { TaskInterface } from "../../components/types";
 import { CombinedTaskActions, TaskActions } from "../actions/tasks-actions";
+import { createSelector } from 'reselect'
+import { TASK_STATUSES } from "../../lib/constants";
 
 export type State = {
     isLoading?: boolean,
@@ -9,6 +11,10 @@ export type State = {
     searchTerm?: string
 }
 
+export type RootState = {
+    tasks: State;
+};
+
 const initState: State = {
     isLoading: false,
     tasks: [],
@@ -17,11 +23,21 @@ const initState: State = {
     searchTerm: ""
 }
 
-export function getFilteredTasks(tasks: TaskInterface[], searchTerm: string) {
-    return tasks.filter(task => (
-        task.title.match(new RegExp(searchTerm, 'i'))
-    ))
-}
+const getTasks = (state: RootState) => state.tasks.tasks
+const getSearchTerm = (state: RootState) => state.tasks.searchTerm
+
+// We memoize the function to avoid unecessary rerenders and unecessary calculations of the function
+export const getFilteredTasks = createSelector([getTasks, getSearchTerm], (tasks, searchTerm = "") => tasks?.filter(task => task.title.match(new RegExp(searchTerm, 'i'))))
+
+export const getGroupedAndFilteredTasks = createSelector([getFilteredTasks], (tasks) => {
+    const grouped: { [key: string]: TaskInterface[] | undefined } = {}
+
+    TASK_STATUSES.forEach(status => {
+        grouped[status] = tasks?.filter((task) => task.status === status);
+    })
+
+    return grouped
+})
 
 export default function tasks(state = initState, action: CombinedTaskActions): State {
     const { type, payload } = action

@@ -13,18 +13,14 @@ import {
     fetchTasksStarted,
 } from "./redux/creators/tasks-creators-server";
 import { filterTasks } from "./redux/creators/tasks-creators-ui";
-import { getFilteredTasks, State } from "./redux/reducers/tasks-reducer";
-
-type RootState = {
-    tasks: State;
-};
+import { getGroupedAndFilteredTasks, RootState, State } from "./redux/reducers/tasks-reducer";
 
 const mapStateToProps = (state: RootState) => {
-    const { isLoading,tasks,error, searchTerm } = state.tasks;
-  
+    const { isLoading, error } = state.tasks;
+
     return {
         isLoading,
-        tasks: getFilteredTasks(tasks ?? [],searchTerm ?? ""),
+        tasks: getGroupedAndFilteredTasks(state),
         error,
     };
 };
@@ -60,9 +56,9 @@ const App: FunctionComponent<ReduxProps> = ({
         updateTask(id, params);
     };
 
-    const onSearch = (searchTerm:string)=>{
-        dispatch(filterTasks(searchTerm))
-    }
+    const onSearch = (searchTerm: string) => {
+        dispatch(filterTasks(searchTerm));
+    };
 
     useEffect(() => {
         dispatch(fetchTasksStarted());
@@ -82,7 +78,7 @@ const App: FunctionComponent<ReduxProps> = ({
                 tasks={tasks || []}
                 onCreateTask={onCreateTask}
                 onStatusChange={onStatusChange}
-                onSearch= {onSearch}
+                onSearch={onSearch}
             />
             {!tasks?.length && !isLoading && <div>No tasks where found</div>}
         </div>
