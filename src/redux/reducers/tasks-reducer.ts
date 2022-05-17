@@ -2,8 +2,9 @@ import { TaskInterface } from "../../components/types";
 import { CombinedTaskActions, TaskActions } from "../actions/tasks-actions";
 import { createSelector } from 'reselect'
 import { TASK_STATUSES } from "../../lib/constants";
+import { RootState } from "../types/shared";
 
-export type State = {
+export type TasksState = {
     isLoading?: boolean,
     error?: string | undefined,
     tasks: TaskInterface[] | undefined,
@@ -11,11 +12,7 @@ export type State = {
     searchTerm?: string
 }
 
-export type RootState = {
-    tasks: State;
-};
-
-const initState: State = {
+const initState: TasksState = {
     isLoading: false,
     tasks: [],
     error: undefined,
@@ -39,7 +36,7 @@ export const getGroupedAndFilteredTasks = createSelector([getFilteredTasks], (ta
     return grouped
 })
 
-export default function tasks(state = initState, action: CombinedTaskActions): State {
+export default function tasks(state = initState, action: CombinedTaskActions): TasksState {
     const { type, payload } = action
     switch (type) {
         case TaskActions.FETCH_TASKS_STARTED: return {

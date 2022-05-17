@@ -1,55 +1,67 @@
 {
-  "tasks": [
+  "projects": [{
+      "id": 1,
+      "name": "Short-term goals"
+    },
     {
+      "id": 2,
+      "name": "Long-term goals"
+    }
+  ],
+  "tasks": [{
       "id": 1,
       "title": "Learn Redux",
       "description": "The store, actions, and reducers, oh my!",
       "status": "Completed",
-      "timer": 38
+      "timer": 38,
+      "projectId": 1
     },
     {
       "id": 2,
       "title": "Learn TypeScript",
       "description": "Make less mistakes, be safe with type safety",
       "status": "Completed",
-      "timer": 901
+      "timer": 901,
+      "projectId": 1
     },
     {
       "title": "Learn Redux Thunk",
       "description": "In order to understand how to make async calls ",
       "status": "Completed",
       "id": "nrbm",
-      "timer": 4
+      "timer": 4,
+      "projectId": 2
     },
     {
       "title": "Learn Terraform",
       "description": "Iac is good, saves time!",
       "status": "Unstarted",
       "id": "1itr5",
-      "timer": 24
+      "timer": 24,
+      "projectId": 2
     },
     {
       "title": "Learn CSS3",
       "description": "Learn Advance CSS3 with CSS Visual Dictionary",
       "status": "Unstarted",
       "id": "a2gnt",
-      "timer": 142
+      "timer": 142,
+      "projectId": 1
     },
     {
       "title": "Play Video Games",
       "description": "Spiderman, God of War",
       "status": "Unstarted",
       "id": "sfetp",
-      "timer": 9
+      "timer": 9,
+      "projectId": 2
     }
   ],
-  "analytics": [
-    {
-      "event": "CREATE_TASK_SUCCEEDED",
-      "data": {
-        "id": "sfetp"
-      },
-      "id": 1
-    }
-  ]
+  "analytics": [{
+    "event": "CREATE_TASK_SUCCEEDED",
+    "data": {
+      "id": "sfetp"
+    },
+    "id": 1
+  }]
 }

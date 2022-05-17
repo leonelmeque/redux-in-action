@@ -94,6 +94,14 @@ const TasksPage: FunctionComponent<TasksPageProps> = ({
                             onChange={onSearch}
                         />
                     </div>
+                    <div>
+                        Project :{" "}
+                        <select name="project" id="project" className="border py-3 px-4">
+                            <option value="project 1">project 1</option>
+                            <option value="project 2">project 2</option>
+                            <option value="project 3">project 3</option>
+                        </select>
+                    </div>
                     <button
                         className="py-3 px-4 bg-black rounded-sm text-white font-bold"
                         onClick={toggleForm}>

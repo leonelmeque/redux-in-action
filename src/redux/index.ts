@@ -5,11 +5,15 @@ import createSagaMiddleware from "@redux-saga/core";
 import { analytics, api, logger } from "./middleware";
 import rootSaga from './sagas'
 import tasks from './reducers/tasks-reducer'
+import page from './reducers/page-reducer'
+import projects from "./reducers/projects-reducer";
 
 const sagaMiddleware = createSagaMiddleware()
 
 const reducers = combineReducers({
+    projects,
     tasks,
+    page
 })
 
 const store = configureStore({

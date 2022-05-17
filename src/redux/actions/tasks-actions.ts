@@ -1,4 +1,5 @@
-import { Analytics, TaskInterface } from "../../components/types"
+import { TaskInterface } from "../../components/types"
+import { ExtendsActionType, Metadata } from "../types/shared"
 
 enum CreateTasksEnums {
     CREATE_TASK_STARTED = "CREATE_TASK_STARTED",
@@ -37,12 +38,6 @@ type TasksPayload = {
     taskId?: string | number
 }
 
-type Metadata = {
-    analytics: Analytics
-}
-export interface ExtendsActionType<T> {
-    type: T
-}
 export interface CreateTasksActions extends ExtendsActionType<CreateTasksEnums> {
     payload: Omit<TasksPayload, 'tasks'>
     meta?: Metadata

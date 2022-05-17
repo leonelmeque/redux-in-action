@@ -13,7 +13,8 @@ import {
     fetchTasksStarted,
 } from "./redux/creators/tasks-creators-server";
 import { filterTasks } from "./redux/creators/tasks-creators-ui";
-import { getGroupedAndFilteredTasks, RootState, State } from "./redux/reducers/tasks-reducer";
+import { getGroupedAndFilteredTasks } from "./redux/reducers/tasks-reducer";
+import { RootState } from "./redux/types/shared";
 
 const mapStateToProps = (state: RootState) => {
     const { isLoading, error } = state.tasks;
