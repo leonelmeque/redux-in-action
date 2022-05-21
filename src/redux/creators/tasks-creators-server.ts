@@ -45,8 +45,7 @@ export const createTaskSucceeded = (task: TaskInterface): CreateTasksActions => 
 })
 
 export const asyncCreateTask = (params: TaskInterface) => (dispatch: Dispatch) => {
-    console.log(params)
-    api.createTask(params).then((res) => {
+    return api.createTask(params).then((res) => {
         if (res.status <= 203) dispatch(createTaskSucceeded(params))
     })
 }
