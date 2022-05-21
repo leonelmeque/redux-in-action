@@ -85,13 +85,19 @@ export default function tasks(state = initState, action: CombinedTaskActions): T
             return state
         }
         case TaskActions.TIMER_INCREMENT: {
-            const nextTasks = state.tasks?.map(task => {
-                if (task.id === payload.taskId) return { ...task, timer: (task.timer ?? 0) + 1 }
-                return task
-            })
+            const task = state.items[payload.taskId as string]
+            
+            const _nextTasks = {
+                ...state.items,
+                [payload.taskId as string]: {
+                    ...task,
+                    timer: (task?.timer ?? 0) + 1
+                }
+            }
+
             return {
                 ...state,
-                tasks: nextTasks
+                items: _nextTasks
             }
         }
         case TaskActions.FILTER_TASKS: {

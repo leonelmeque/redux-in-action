@@ -59,7 +59,8 @@ export const updateTask = (task: TaskInterface): UpdateTasksActions => ({
 })
 
 export const asyncUpdateTask = ({ id, params }: { id: TaskID, params: TaskInterface }) => (dispatch: Dispatch, getState: () => RootState) => {
-    const task = getState().tasks.tasks?.find(task => task.id === id)
+  
+    const task = getState().tasks.items[id]
     const updatedTask = Object.assign({}, task, params)
 
     api.updateTask(id, updatedTask).then((res) => {

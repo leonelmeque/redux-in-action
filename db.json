@@ -13,7 +13,7 @@
     {
       "title": "Learn Redux",
       "description": "The store, actions, and reducers, oh my!",
-      "status": "In Progress",
+      "status": "Completed",
       "timer": 38,
       "projectId": 1,
       "id": 1
@@ -22,7 +22,7 @@
       "title": "Learn TypeScript",
       "description": "Make less mistakes, be safe with type safety",
       "status": "Unstarted",
-      "timer": 901,
+      "timer": 928,
       "projectId": 1,
       "id": 2
     },
@@ -45,8 +45,8 @@
     {
       "title": "Learn CSS3",
       "description": "Learn Advance CSS3 with CSS Visual Dictionary",
-      "status": "Unstarted",
-      "timer": 142,
+      "status": "Completed",
+      "timer": 144,
       "projectId": 1,
       "id": "a2gnt"
     },
@@ -55,7 +55,7 @@
       "description": "Spiderman, God of War",
       "status": "Unstarted",
       "id": "sfetp",
-      "timer": 9,
+      "timer": 15,
       "projectId": 2
     }
   ],
