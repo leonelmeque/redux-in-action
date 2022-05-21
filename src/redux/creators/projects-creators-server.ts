@@ -1,7 +1,12 @@
 import { Dispatch } from "redux";
 import { FetchProjectAction, ProjectActions } from "../actions/project-actions";
 import * as api from "../../lib/api";
-import { RootState } from "../reducers/tasks-reducer";
+import { RootState } from "../types/shared";
+import { projectSchema } from "../normalizr";
+import { normalize } from "normalizr";
+import { receiveEntities } from "./schema-creators";
+import { setCurrentProjectId } from "./page-creators-ui";
+
 
 export const fetchProjectsStarted = (): FetchProjectAction => ({
     type: ProjectActions.FETCH_PROJECTS_STARTED,
@@ -35,15 +40,25 @@ export const fetchProjectsFailed = (err: any): FetchProjectAction => ({
 })
 
 
-export const fetchProjects = async () => (dispatch: Dispatch, getState: () => RootState) => {
+export const asyncfetchProjects = () => (dispatch: Dispatch, getState: () => RootState) => {
     dispatch(fetchProjectsStarted())
     return api.fetchProjects().then(res => {
         const projects = res.data
+        
+        const normalizedData = normalize(projects, [projectSchema])
+        console.log(normalizedData)
+        dispatch(receiveEntities(normalizedData))
 
-        dispatch(fetchProjectsSucceded(projects))
+        if (!getState().page.currentProjectId) {
+            const defaultProjectId = projects[0].id
+            dispatch(setCurrentProjectId(defaultProjectId))
+        }
+
 
     }).catch(e => {
         console.error(e)
         dispatch(fetchProjectsFailed(e))
     })
 }
+
+

@@ -1,19 +1,22 @@
-import { ChangeEvent, Fragment, FunctionComponent, useState } from "react";
+import { ChangeEvent, Children, Fragment, FunctionComponent, useState } from "react";
 import { uniqueId } from "../lib/helpers";
+import projects from "../redux/reducers/projects-reducer";
 import TaskList from "./TaskList";
 import { TaskInterface } from "./types";
 
 interface TasksPageProps {
-    tasks: {[key: string]: TaskInterface[] | undefined};
+    tasks: { [key: string]: TaskInterface[] | undefined };
     onCreateTask: (args: any) => void;
     onStatusChange: (...args: any) => void;
     onSearch: (searchTerm: string) => void;
+    isLoading: boolean;
 }
 
 const initState = {
     showNewCardForm: false,
     title: "",
     description: "",
+    isLoading: false,
 };
 
 const TasksPage: FunctionComponent<TasksPageProps> = ({
@@ -21,6 +24,7 @@ const TasksPage: FunctionComponent<TasksPageProps> = ({
     onCreateTask,
     onStatusChange,
     onSearch: _onSearch,
+    isLoading,
 }) => {
     const [state, setState] = useState<{ [key: string]: any }>(initState);
 
@@ -58,57 +62,29 @@ const TasksPage: FunctionComponent<TasksPageProps> = ({
         });
     };
 
-    const renderTaskLists = () => {
-  
-      return (
-            <div className="flex flex-row gap-4">
-                {Object.keys(tasks).map((status) => {
-                    const tasksByStatus = tasks[status];
+    const renderTaskLists = () =>
+        Object.keys(tasks).map((status) => {
+            const tasksByStatus = tasks[status];
+            return (
+                <TaskList
+                    key={status}
+                    status={status}
+                    tasks={tasksByStatus}
+                    onStatusChange={onStatusChange}
+                />
+            );
+        });
 
-                    return (
-                        <TaskList
-                            key={status}
-                            status={status}
-                            tasks={tasksByStatus}
-                            onStatusChange={onStatusChange}
-                        />
-                    );
-                })}
+    if (isLoading)
+        return (
+            <div className="flex text-center max-w-4xl mx-auto items-center justify-center h-max">
+                <p className="font-bold text-2xls">Loading data...</p>
             </div>
         );
-    };
 
     return (
         <Fragment>
             <div className="tasks">
-                <div className="flex items-center justify-between my-4">
-                    <h2 className="text-2xl">
-                        {!state?.showNewCardForm ? "Your Tasks" : "Add a new task"}
-                    </h2>
-                    <div>
-                        <input
-                            type="text"
-                            name="search"
-                            placeholder="Search task..."
-                            className="border-[1px] p-3 bg-white"
-                            onChange={onSearch}
-                        />
-                    </div>
-                    <div>
-                        Project :{" "}
-                        <select name="project" id="project" className="border py-3 px-4">
-                            <option value="project 1">project 1</option>
-                            <option value="project 2">project 2</option>
-                            <option value="project 3">project 3</option>
-                        </select>
-                    </div>
-                    <button
-                        className="py-3 px-4 bg-black rounded-sm text-white font-bold"
-                        onClick={toggleForm}>
-                        + New Task
-                    </button>
-                </div>
-
                 <div className="my-4">
                     {state?.showNewCardForm && (
                         <form className="flex gap-4 flex-col" onSubmit={_onCreateTask}>
@@ -138,7 +114,7 @@ const TasksPage: FunctionComponent<TasksPageProps> = ({
                         </form>
                     )}
                 </div>
-                <div className="tasks-list">{renderTaskLists()}</div>
+                <div className="flex flex-row gap-4">{renderTaskLists()}</div>
             </div>
         </Fragment>
     );

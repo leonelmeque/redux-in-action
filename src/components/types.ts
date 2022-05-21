@@ -6,6 +6,13 @@ export interface TaskInterface {
     title: string
     status?: string
     timer?:number
+    projectId:string
+}
+
+export interface ProjectInterface {
+    id: number,
+    name: string,
+    tasks: string[]
 }
 
 export type Analytics = {

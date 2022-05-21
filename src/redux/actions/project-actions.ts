@@ -1,4 +1,6 @@
 import { ExtendsActionType, Metadata } from "../types/shared"
+import { ReceveiEntitiesAction } from "./schema-actions"
+import { CreateTasksActions } from "./tasks-actions"
 
 
 enum FetchProjectsEnums {
@@ -14,4 +16,4 @@ export interface FetchProjectAction extends ExtendsActionType<FetchProjectsEnums
     meta?: Metadata
 }
 
-export type CombinedProjectActions = FetchProjectAction
+export type CombinedProjectActions = FetchProjectAction | ReceveiEntitiesAction | CreateTasksActions

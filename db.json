@@ -1,28 +1,30 @@
 {
-  "projects": [{
+  "projects": [
+    {
       "id": 1,
-      "name": "Short-term goals"
+      "name": "Short-Term Goals"
     },
     {
       "id": 2,
-      "name": "Long-term goals"
+      "name": "Long-Term Goals"
     }
   ],
-  "tasks": [{
-      "id": 1,
+  "tasks": [
+    {
       "title": "Learn Redux",
       "description": "The store, actions, and reducers, oh my!",
-      "status": "Completed",
+      "status": "In Progress",
       "timer": 38,
-      "projectId": 1
+      "projectId": 1,
+      "id": 1
     },
     {
-      "id": 2,
       "title": "Learn TypeScript",
       "description": "Make less mistakes, be safe with type safety",
-      "status": "Completed",
+      "status": "Unstarted",
       "timer": 901,
-      "projectId": 1
+      "projectId": 1,
+      "id": 2
     },
     {
       "title": "Learn Redux Thunk",
@@ -44,9 +46,9 @@
       "title": "Learn CSS3",
       "description": "Learn Advance CSS3 with CSS Visual Dictionary",
       "status": "Unstarted",
-      "id": "a2gnt",
       "timer": 142,
-      "projectId": 1
+      "projectId": 1,
+      "id": "a2gnt"
     },
     {
       "title": "Play Video Games",
@@ -57,11 +59,13 @@
       "projectId": 2
     }
   ],
-  "analytics": [{
-    "event": "CREATE_TASK_SUCCEEDED",
-    "data": {
-      "id": "sfetp"
-    },
-    "id": 1
-  }]
+  "analytics": [
+    {
+      "event": "CREATE_TASK_SUCCEEDED",
+      "data": {
+        "id": "sfetp"
+      },
+      "id": 1
+    }
+  ]
 }

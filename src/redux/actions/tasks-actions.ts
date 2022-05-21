@@ -1,5 +1,6 @@
 import { TaskInterface } from "../../components/types"
 import { ExtendsActionType, Metadata } from "../types/shared"
+import { ReceveiEntitiesAction } from "./schema-actions"
 
 enum CreateTasksEnums {
     CREATE_TASK_STARTED = "CREATE_TASK_STARTED",
@@ -65,5 +66,6 @@ export type CombinedTaskActions =
     FetchTasksActions |
     UpdateTasksActions |
     TimerTasksActions |
-    SearchTasksActions
+    SearchTasksActions | 
+    ReceveiEntitiesAction
 

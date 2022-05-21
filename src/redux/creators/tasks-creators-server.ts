@@ -2,7 +2,8 @@ import { Dispatch } from "redux"
 import { TaskID, TaskInterface } from "../../components/types"
 import { CreateTasksActions, FetchTasksActions, UpdateTasksActions, TaskActions } from "../actions/tasks-actions"
 import * as api from '../../lib/api'
-import { RootState } from ".."
+import { RootState } from "../types/shared"
+
 
 export const fetchTasksStarted = (): FetchTasksActions => ({
     type: TaskActions.FETCH_TASKS_STARTED,
